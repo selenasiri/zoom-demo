@@ -2,7 +2,7 @@ const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
   host: '/',
-  port: '3001'
+  port: '3000'
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -14,7 +14,7 @@ navigator.mediaDevices.getUserMedia({
   addVideoStream(myVideo, stream)
 
   myPeer.on('call', call => {
-    call.answer(stream)
+    call.answer(stream)                           // lets the user being called join 
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
@@ -27,7 +27,8 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
+  console.log(userId)
+  // if (peers[userId]) peers[userId].close()
 })
 
 myPeer.on('open', id => {
