@@ -14,7 +14,7 @@ navigator.mediaDevices.getUserMedia({
   addVideoStream(myVideo, stream)
 
   myPeer.on('call', call => {
-    call.answer(stream)                           // lets the user being called join 
+    call.answer(stream)                           
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
@@ -28,7 +28,6 @@ navigator.mediaDevices.getUserMedia({
 
 socket.on('user-disconnected', userId => {
   console.log(userId)
-  // if (peers[userId]) peers[userId].close()
 })
 
 myPeer.on('open', id => {
